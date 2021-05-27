@@ -35,9 +35,9 @@ const typeDefs = gql`
 `
 const tableName = "messages"
 
+const ThirtyDays = 60 * 60 * 24 * 30;
 client.connect().then(client => client.db(dbName).collection(tableName)
-    // .drop())
-    .createIndex({"createdAt": 1}, {expireAfterSeconds: 60 * 60}))
+    .createIndex({"createdAt": 1}, {expireAfterSeconds: ThirtyDays }))
 
 const resolvers = {
     Mutation: {

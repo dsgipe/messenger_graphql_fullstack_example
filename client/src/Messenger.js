@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function getMessageString(message, prevName) {
+function getMessageString(message) {
+    let prevName = ""
     return message.map(it => {
         const displayName = it.name !== prevName
         let nameHeader = displayName ? `${it.name}:\n` : ""
@@ -44,11 +45,10 @@ export function Messenger({postID, value, setValue, historicMessages}) {
         }].filter(it => it.message !== undefined))
     }, [data.data])
 
-    let prevName = ""
 
-    const messageString = getMessageString(message, prevName);
+    const messageString = getMessageString(message);
 
-    const historicMessageString = historicMessages ? getMessageString(historicMessages["users"], prevName).join("") : "";
+    const historicMessageString = historicMessages ? getMessageString(historicMessages["users"]).join("") : "";
 
     let messageContents = messageString.join("");
     return (
